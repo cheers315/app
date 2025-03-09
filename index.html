@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cheers 315 Mobile Bartending</title>
+<link rel="icon" type="image/x-icon" href="images\assets\pngtree-cocktail-drink-vector-png-image_13011731.jpg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1,h5 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  background-image: url('images/index.png');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+  .bgimg {
+    background-image: url('images/index-mobile.png'); background-color: black; /* Your mobile background */
+  }
+  
+  .nav-desktop {
+    display: none !important;
+  }
+  
+  .nav-mobile {
+    display: block !important;
+  }
+  
+  .menu-items {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    font-size: 25px;
+  }
+  
+  .menu-items.show {
+    display: block;
+  }
+  
+  .menu-items button {
+    width: 100%;
+    text-align: left;
+    padding: 15px 20px;
+  }
+}
+
+/* Desktop styles */
+@media screen and (min-width: 769px) {
+  .nav-mobile {
+    display: none !important;
+  }
+  
+  .nav-desktop {
+    display: flex !important;
+  }
+}
+
+/* Input field styling */
+.w3-input:focus {
+    background-color: #f1f1f1 !important; /* Light grey */
+    outline: none;
+}
+
+/* For autofill background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #f1f1f1 inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+</style>
+</head>
+<body>
+
+<div class="bgimg w3-display-container w3-text-white">
+  <div class="w3-display-middle w3-jumbo">
+  </div>
+  
+  <!-- Desktop Navigation -->
+  <div class="nav-desktop w3-container w3-xlarge w3-black" style="width: 100%; padding: 20px; display: flex; justify-content: center; gap: 20px; font-weight: 900; font-size: 3em;">
+    <button onclick="document.getElementById('about').style.display='block'" class="w3-button w3-black">about us</button>
+    <button onclick="document.getElementById('services').style.display='block'" class="w3-button w3-black">services</button>
+    <button onclick="document.getElementById('faqs').style.display='block'" class="w3-button w3-black">faqs</button>
+    <button onclick="document.getElementById('contact').style.display='block'" class="w3-button w3-black">contact</button>
+    <button onclick="document.getElementById('docs').style.display='block'" class="w3-button w3-black">docs</button>
+  </div>
+  
+  <!-- Mobile Navigation -->
+  <div class="nav-mobile w3-container w3-black" style="width: 100%; padding: 10px; display: none;">
+    <button onclick="toggleMenu()" class="w3-button w3-black" style="font-size: 24px;">
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="menu-items" id="mobileMenu">
+      <button onclick="document.getElementById('about-mobile').style.display='block'" class="w3-button w3-black">about us</button>
+      <button onclick="document.getElementById('services-mobile').style.display='block'" class="w3-button w3-black">services</button>
+      <button onclick="document.getElementById('faqs-mobile').style.display='block'" class="w3-button w3-black">faqs</button>
+      <button onclick="document.getElementById('contact').style.display='block'" class="w3-button w3-black">contact</button>
+      <button onclick="document.getElementById('docs').style.display='block'" class="w3-button w3-black">docs</button>
+    </div>
+  </div>
+
+  <div class="w3-display-bottomleft w3-container" style="font-weight: 900; font-size: 3em; background-color: rgba(0, 0, 0, 0.7); width: 100%; padding: 10px;">
+        <i class="fa fa-facebook-official w3-hover-opacity" style="position: static; font-size: 4ev; padding-top: 6px;"></i>
+        <a href="https://www.instagram.com/cheers_315?igsh=MWttN2I4Y2o5azc4bg==" ><i class="fa fa-instagram w3-hover-opacity" style="font-size: 4ev"></i></a>
+    <p class="w3-large" style="font-weight: 900; font-size: 5em; margin-top: 10px;">© 2024 Cheers 315 LLC est 2024. Fully licensed and insured.</p>
+  </div>
+</div>
+
+<!-- about us Modal -->
+<div id="about" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+      <span onclick="document.getElementById('about').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <h1>about us</h1>
+    </div>
+    <div class="w3-container">
+      <img src="images/aboutuscontent.png" alt="About Us" style="width: 100%; height: auto; background-color: black;">
+    </div>
+  </div>
+</div>
+
+<!-- Contact Modal -->
+<div id="contact" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black">
+      <span onclick="document.getElementById('contact').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <h1>contact us!</h1>
+    </div>
+    <div class="w3-container">
+      <p>We would love to hear from you!</p>
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
+        <p>
+          <input 
+            class="w3-input w3-padding-16 w3-border" 
+            type="tel" 
+            placeholder="Enter phone (xxx-xxx-xxxx)" 
+            required 
+            name="phone"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            oninput="validatePhone(this)"
+            id="phone">
+          <span id="phoneError" style="color: red; display: none;">Please enter a valid phone number (xxx-xxx-xxxx)</span>
+        </p>
+        <p>
+          <input 
+            class="w3-input w3-padding-16 w3-border" 
+            type="email" 
+            placeholder="Enter Email" 
+            required 
+            name="email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            oninput="validateEmail(this)"
+            id="email">
+          <span id="emailError" style="color: red; display: none;">Please enter a valid email address</span>
+        </p>
+        <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date and time" required name="date" id="dateTimePicker"></p>
+        <p><input class="w3-input w3-padding-16 w3-border" type="text" max-length="60" placeholder="Enter location" required name="Location"></p>
+        <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="How many people?" required name="Enter number"></p>
+        <p><textarea class="w3-input w3-padding-16 w3-border" rows="3" placeholder="Message \ Special requirements / Anything else that I should know?" name="Message"></textarea></p>
+        <p style="display: flex; gap: 10px;">
+          <button class="w3-button w3-dark-grey w3-hover-black" type="submit">SEND MESSAGE</button>
+          <button class="w3-button w3-dark-grey w3-hover-black" type="reset">RESET FORM</button>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- home Modal -->
+<div id="home" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom">
+      <div class="w3-container w3-black w3-display-container">
+        <span onclick="document.getElementById('home').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+        <h1></h1>
+      </div>
+      <div class="w3-container">
+        <img src="images/index.png" alt="About Us" style="width: 100%; height: auto; background-color: black;">
+      </div>
+    </div>
+  </div>
+
+<!-- services Modal -->
+<div id="services" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom">
+      <div class="w3-container w3-black w3-display-container">
+        <span onclick="document.getElementById('services').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+        <h1></h1>
+      </div>
+      <div class="w3-container" style="border-radius: 0px">
+        <img src="images/servicescontent.png" alt="About Us" style="width: 100%; height: auto; border-color: black;">
+      </div>
+    </div>
+  </div>
+
+<!-- faqs Modal -->
+<div id="faqs" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom">
+      <div class="w3-container w3-black w3-display-container">
+        <span onclick="document.getElementById('faqs').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+        <h1></h1>
+      </div>
+      <div class="w3-container">
+        <img src="images/faqcontent.png" alt="faq" style="width: 100%; height: auto; background-color: black;">
+      </div>
+    </div>
+</div>
+
+<!-- about-mobile Modal -->
+<div id="about-mobile" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+      <span onclick="document.getElementById('about-mobile').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <img src="images\aboutuscontent-mobile.png" class="mobile-image" style="width:100%;">
+    </div>
+  </div>
+</div>
+
+<!-- services-mobile Modal -->
+<div id="services-mobile" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+      <span onclick="document.getElementById('services-mobile').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <img src="images\servicescontent-mobile.png" class="mobile-image" style="width:100%;">
+    </div>
+  </div>
+</div>
+
+<!-- faqs-mobile Modal -->
+<div id="faqs-mobile" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+      <span onclick="document.getElementById('faqs-mobile').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <img src="images\faqs-mobile.png" class="mobile-image" style="width:100%;">
+    </div>
+  </div>
+</div>
+
+<!-- Docs Modal -->
+<div id="docs" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black">
+      <span onclick="document.getElementById('docs').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <h1>Documents</h1>
+    </div>
+    <div class="w3-container w3-padding-32">
+      <div class="w3-section">
+        <h3>Download Contract</h3>
+        <p>Please download, review, and sign our service contract:</p>
+        <a href="documents/cheers315_contract.pdf" download class="w3-button w3-dark-grey w3-hover-black">
+          <i class="fa fa-download"></i> Download Contract
+        </a>
+      </div>
+      
+      <div class="w3-section">
+        <h3>Upload Signed Contract</h3>
+        <p>Once you've signed the contract, please upload it here:</p>
+        <form id="uploadForm" onsubmit="handleContractUpload(event)">
+          <input type="file" 
+                 id="contractUpload" 
+                 name="contract" 
+                 accept=".pdf,.doc,.docx" 
+                 required 
+                 class="w3-input w3-border w3-margin-bottom">
+          <button type="submit" class="w3-button w3-dark-grey w3-hover-black">
+            <i class="fa fa-upload"></i> Upload Contract
+          </button>
+        </form>
+        <div id="uploadStatus" style="margin-top: 10px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Get today's date and set time to current time
+  let today = new Date();
+  
+  // Calculate date 3 years from now
+  let threeYearsFromNow = new Date();
+  threeYearsFromNow.setFullYear(today.getFullYear() + 3);
+  
+  // Format dates for datetime-local input
+  let todayFormatted = today.toISOString().slice(0, 16);
+  let maxDateFormatted = threeYearsFromNow.toISOString().slice(0, 16);
+  
+  // Get the date picker element
+  let datePicker = document.getElementById('dateTimePicker');
+  
+  // Set min and max dates
+  datePicker.min = todayFormatted;
+  datePicker.max = maxDateFormatted;
+  datePicker.value = todayFormatted;
+</script>
+
+<script>
+async function handleSubmit(event) {
+    event.preventDefault();
+    
+    // Additional validation before submission
+    const phoneInput = document.getElementById('phone');
+    const emailInput = document.getElementById('email');
+    
+    if (!phoneInput.checkValidity() || !emailInput.checkValidity()) {
+        return; // Stop form submission if validation fails
+    }
+    
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+    
+    // Add timestamp
+    data.timestamp = new Date().toLocaleString();
+    
+    // Create table row HTML
+    const rowHtml = `
+        <tr>
+            <td>${data.timestamp}</td>
+            <td>${data.Name}</td>
+            <td>${data.phone}</td>
+            <td>${data.email}</td>
+            <td>${data.date}</td>
+            <td>${data.Location}</td>
+            <td>${data['Enter number']}</td>
+            <td>${data.Message}</td>
+        </tr>
+    `;
+
+    // Store the new row in localStorage
+    const submissions = localStorage.getItem('submissions') || '';
+    localStorage.setItem('submissions', submissions + rowHtml);
+
+    // Send email using EmailJS
+    try {
+        await emailjs.send(
+            'nicaman9',
+            'template_ins46kh',
+            {
+                to_email: 'nicaman9@gmail.com',
+                message: formatEmailBody(data),
+                from_name: data.Name,
+                reply_to: data.email
+            },
+            'YOUR_USER_ID'
+        );
+
+        alert('Thank you! Your booking request has been sent.');
+        event.target.reset();
+    } catch (error) {
+        console.error('Error:', error);
+        alert('There was an error sending your request. Please try again.');
+    }
+}
+
+function formatEmailBody(data) {
+    return `        New booking request:
+        Name: ${data.Name}
+        Phone: ${data.phone}
+        Email: ${data.email}
+        Date: ${data.date}
+        Location: ${data.Location}
+        Guests: ${data['Enter number']}
+        Message: ${data.Message}
+    `;
+}
+</script>
+
+<!-- Add EmailJS SDK -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+    (function() {
+        emailjs.init("9CgHX9qbJLhKNGXNI");
+    })();
+</script>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('show');
+    
+    // Close any open modals
+    const modals = ['home', 'about', 'services', 'faqs', 'contact'];
+    modals.forEach(modalId => {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('mobileMenu');
+    const menuButton = event.target.closest('button');
+    
+    if (!menuButton && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+    }
+});
+</script>
+
+<script>
+// Add these functions to your existing scripts
+function validatePhone(input) {
+    const phoneRegex = /^\d{3}-\d{3}-\d{4}$/;
+    const errorElement = document.getElementById('phoneError');
+    
+    // Format the phone number as user types
+    let value = input.value.replace(/\D/g, ''); // Remove non-digits
+    if (value.length > 0) {
+        value = value.match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+        input.value = !value[2] ? value[1] 
+                   : !value[3] ? `${value[1]}-${value[2]}`
+                   : `${value[1]}-${value[2]}-${value[3]}`;
+    }
+    
+    // Show/hide error message
+    if (phoneRegex.test(input.value)) {
+        errorElement.style.display = 'none';
+        input.setCustomValidity('');
+    } else {
+        errorElement.style.display = 'block';
+        input.setCustomValidity('Please enter a valid phone number');
+    }
+}
+
+function validateEmail(input) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const errorElement = document.getElementById('emailError');
+    
+    if (emailRegex.test(input.value)) {
+        errorElement.style.display = 'none';
+        input.setCustomValidity('');
+    } else {
+        errorElement.style.display = 'block';
+        input.setCustomValidity('Please enter a valid email address');
+    }
+}
+</script>
+
+<script>
+async function handleContractUpload(event) {
+    event.preventDefault();
+    const statusDiv = document.getElementById('uploadStatus');
+    const fileInput = document.getElementById('contractUpload');
+    const file = fileInput.files[0];
+
+    if (!file) {
+        statusDiv.innerHTML = '<p style="color: red;">Please select a file to upload.</p>';
+        return;
+    }
+
+    // Show loading status
+    statusDiv.innerHTML = '<p>Uploading...</p>';
+
+    try {
+        // Create FormData object
+        const formData = new FormData();
+        formData.append('contract', file);
+
+        // Replace with your actual upload endpoint
+        const response = await fetch('/upload-contract', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            statusDiv.innerHTML = '<p style="color: green;">Contract uploaded successfully!</p>';
+            // Clear the file input
+            fileInput.value = '';
+        } else {
+            throw new Error('Upload failed');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        statusDiv.innerHTML = '<p style="color: red;">Upload failed. Please try again.</p>';
+    }
+}
+</script>
+
+</body>
+</html>
+
+

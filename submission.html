@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Submissions</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .w3-table-all {
+            margin-top: 20px;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        .delete-btn {
+            color: red;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        .delete-btn:hover {
+            background-color: rgba(255, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls w3-bar w3-black">
+        <a href="index.html" class="w3-bar-item w3-button">Back to Home</a>
+        <button class="w3-bar-item w3-button" onclick="downloadCSV()">Download CSV</button>
+        <button class="w3-bar-item w3-button" onclick="clearSubmissions()">Clear All</button>
+    </div>
+
+    <table class="w3-table-all" id="submissionsTable">
+        <tr class="w3-black">
+            <th>Timestamp</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Guests</th>
+            <th>Message</th>
+            <th>Action</th>
+        </tr>
+        <tbody id="submissionsBody"></tbody>
+    </table>
+
+    <script>
+        // Load submissions when page loads
+        window.onload = function() {
+            loadSubmissions();
+        };
+
+        function loadSubmissions() {
+            const submissions = localStorage.getItem('submissions') || '';
+            const tbody = document.getElementById('submissionsBody');
+            tbody.innerHTML = submissions.replace(/<\/tr>/g, '<td><i class="fa fa-trash delete-btn" onclick="deleteRow(this)"></i></td></tr>');
+        }
+
+        function deleteRow(element) {
+            if (confirm('Are you sure you want to delete this submission?')) {
+                const row = element.closest('tr');
+                const tbody = document.getElementById('submissionsBody');
+                row.remove();
+                // Update localStorage with remaining rows
+                localStorage.setItem('submissions', tbody.innerHTML.replace(/<td><i class="fa fa-trash delete-btn" onclick="deleteRow\(this\)"><\/i><\/td>/g, ''));
+            }
+        }
+
+        function clearSubmissions() {
+            if (confirm('Are you sure you want to clear all submissions?')) {
+                localStorage.setItem('submissions', '');
+                document.getElementById('submissionsBody').innerHTML = '';
+            }
+        }
+
+        function downloadCSV() {
+            const rows = document.querySelectorAll('#submissionsTable tr');
+            let csv = 'Timestamp,Name,Phone,Email,Date,Location,Guests,Message\n';
+            
+            // Skip header row by starting at index 1
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].querySelectorAll('td');
+                // Get all cells except the last one (delete button)
+                const rowData = Array.from(cells).slice(0, -1).map(cell => `"${cell.textContent}"`);
+                csv += rowData.join(',') + '\n';
+            }
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'submissions.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html> 
