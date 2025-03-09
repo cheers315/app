@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Booking Requests</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+        #bookingsTable {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div id="loginForm" class="w3-container w3-card-4 login-container">
+        <h2>Admin Login</h2>
+        <p>
+            <input class="w3-input w3-border" type="password" id="password" placeholder="Enter password">
+        </p>
+        <p>
+            <button class="w3-button w3-dark-grey w3-hover-black" onclick="login()">Login</button>
+        </p>
+    </div>
+
+    <!-- Bookings Table -->
+    <div id="bookingsTable" class="w3-container">
+        <div class="w3-bar w3-black">
+            <button class="w3-bar-item w3-button" onclick="downloadCSV()">Download CSV</button>
+            <button class="w3-bar-item w3-button" onclick="logout()">Logout</button>
+        </div>
+        <h2>Booking Requests</h2>
+        <table class="w3-table-all" id="bookings">
+            <tr>
+                <th>Timestamp</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Guests</th>
+                <th>Message</th>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        const ADMIN_PASSWORD = 'your_chosen_password'; // Change this to your desired password
+        
+        function login() {
+            const password = document.getElementById('password').value;
+            if (password === ADMIN_PASSWORD) {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('bookingsTable').style.display = 'block';
+                loadBookings();
+            } else {
+                alert('Incorrect password');
+            }
+        }
+
+        function logout() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('bookingsTable').style.display = 'none';
+            document.getElementById('password').value = '';
+        }
+
+        function loadBookings() {
+            const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+            const table = document.getElementById('bookings');
+            
+            // Clear existing rows except header
+            while (table.rows.length > 1) {
+                table.deleteRow(1);
+            }
+
+            // Add bookings to table
+            bookings.forEach(booking => {
+                const row = table.insertRow();
+                row.insertCell().textContent = new Date(booking.timestamp).toLocaleString();
+                row.insertCell().textContent = booking.Name;
+                row.insertCell().textContent = booking.phone;
+                row.insertCell().textContent = booking.email;
+                row.insertCell().textContent = booking.date;
+                row.insertCell().textContent = booking.Location;
+                row.insertCell().textContent = booking['Enter number'];
+                row.insertCell().textContent = booking.Message;
+            });
+        }
+
+        function downloadCSV() {
+            const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+            let csv = 'Timestamp,Name,Phone,Email,Date,Location,Guests,Message\n';
+            
+            bookings.forEach(booking => {
+                csv += `"${booking.timestamp}","${booking.Name}","${booking.phone}","${booking.email}",` +
+                       `"${booking.date}","${booking.Location}","${booking['Enter number']}","${booking.Message}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'bookings.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html> 
