@@ -309,70 +309,41 @@ textarea:-webkit-autofill:focus {
 async function handleSubmit(event) {
     event.preventDefault();
     
-    // Additional validation before submission
+    // Validation
     const phoneInput = document.getElementById('phone');
     const emailInput = document.getElementById('email');
     
     if (!phoneInput.checkValidity() || !emailInput.checkValidity()) {
-        return; // Stop form submission if validation fails
+        return;
     }
     
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     
-    // Add timestamp
-    data.timestamp = new Date().toLocaleString();
-    
-    // Create table row HTML
-    const rowHtml = `
-        <tr>
-            <td>${data.timestamp}</td>
-            <td>${data.Name}</td>
-            <td>${data.phone}</td>
-            <td>${data.email}</td>
-            <td>${data.date}</td>
-            <td>${data.Location}</td>
-            <td>${data['Enter number']}</td>
-            <td>${data.Message}</td>
-        </tr>
-    `;
-
-    // Store the new row in localStorage
-    const submissions = localStorage.getItem('submissions') || '';
-    localStorage.setItem('submissions', submissions + rowHtml);
-
-    // Send email using EmailJS
     try {
-        await emailjs.send(
-            'nicaman9',
-            'template_ins46kh',
+        // Send email using EmailJS
+        const response = await emailjs.send(
+            "nicaman9",           // Your service ID
+            "template_ins46kh",   // Your template ID
             {
-                to_email: 'nicaman9@gmail.com',
-                message: formatEmailBody(data),
                 from_name: data.Name,
-                reply_to: data.email
-            },
-            'YOUR_USER_ID'
+                from_email: data.email,
+                phone: data.phone,
+                event_date: data.date,
+                location: data.Location,
+                guests: data['Enter number'],
+                message: data.Message || 'No message provided',
+                timestamp: new Date().toLocaleString()
+            }
         );
 
+        console.log("SUCCESS!", response.status, response.text);
         alert('Thank you! Your booking request has been sent.');
         event.target.reset();
     } catch (error) {
-        console.error('Error:', error);
+        console.error("FAILED...", error);
         alert('There was an error sending your request. Please try again.');
     }
-}
-
-function formatEmailBody(data) {
-    return `        New booking request:
-        Name: ${data.Name}
-        Phone: ${data.phone}
-        Email: ${data.email}
-        Date: ${data.date}
-        Location: ${data.Location}
-        Guests: ${data['Enter number']}
-        Message: ${data.Message}
-    `;
 }
 </script>
 
