@@ -15,13 +15,16 @@ body, html {height: 100%}
   background-image: url('images/index.png');
   min-height: 100%;
   background-position: center;
-  background-size: cover;
+  background-size:cover;
 }
 
 /* Mobile styles */
 @media screen and (max-width: 768px) {
   .bgimg {
-    background-image: url('images/index-mobile.png'); background-color: black; /* Your mobile background */
+    background-image: url('images/index-mobile.png');
+    background-color: black;
+    background-size: contain; /* Your mobile background */
+    min-width: 400px;
   }
   
   .nav-desktop {
@@ -92,7 +95,7 @@ textarea:-webkit-autofill:focus {
   <div class="nav-desktop w3-container w3-xlarge w3-black" style="width: 100%; padding: 20px; display: flex; justify-content: center; gap: 20px; font-weight: 900; font-size: 3em;">
     <button onclick="document.getElementById('about').style.display='block'" class="w3-button w3-black">about us</button>
     <button onclick="document.getElementById('services').style.display='block'" class="w3-button w3-black">services</button>
-    <button onclick="document.getElementById('faqs').style.display='block'" class="w3-button w3-black">faqs</button>
+    <button onclick="document.getElementById('faqs').style.display='block'" class="w3-button w3-black">faq</button>
     <button onclick="document.getElementById('contact').style.display='block'" class="w3-button w3-black">contact</button>
     <button onclick="document.getElementById('docs').style.display='block'" class="w3-button w3-black">docs</button>
   </div>
@@ -166,6 +169,7 @@ textarea:-webkit-autofill:focus {
             id="email">
           <span id="emailError" style="color: red; display: none;">Please enter a valid email address</span>
         </p>
+        <p> When is your event?</p>
         <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date and time" required name="date" id="dateTimePicker"></p>
         <p><input class="w3-input w3-padding-16 w3-border" type="text" max-length="60" placeholder="Enter location" required name="Location"></p>
         <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="How many people?" required name="Enter number"></p>
@@ -293,8 +297,20 @@ textarea:-webkit-autofill:focus {
   threeYearsFromNow.setFullYear(today.getFullYear() + 3);
   
   // Format dates for datetime-local input
-  let todayFormatted = today.toISOString().slice(0, 16);
-  let maxDateFormatted = threeYearsFromNow.toISOString().slice(0, 16);
+  function formatDateTimeForInput(date) {
+    // Get local date and time parts
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    
+    // Format as YYYY-MM-DDThh:mm
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  }
+  
+  let todayFormatted = formatDateTimeForInput(today);
+  let maxDateFormatted = formatDateTimeForInput(threeYearsFromNow);
   
   // Get the date picker element
   let datePicker = document.getElementById('dateTimePicker');
@@ -320,6 +336,17 @@ async function handleSubmit(event) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     
+    // Format the date to include AM/PM
+    const eventDate = new Date(data.date);
+    const formattedDate = eventDate.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true // This ensures AM/PM format
+    });
+    
     try {
         // Send email using EmailJS
         const response = await emailjs.send(
@@ -329,7 +356,7 @@ async function handleSubmit(event) {
                 from_name: data.Name,
                 from_email: data.email,
                 phone: data.phone,
-                event_date: data.date,
+                event_date: formattedDate, // Use the formatted date
                 location: data.Location,
                 guests: data['Enter number'],
                 message: data.Message || 'No message provided',
