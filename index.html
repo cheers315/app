@@ -97,7 +97,6 @@ textarea:-webkit-autofill:focus {
     <button onclick="document.getElementById('services').style.display='block'" class="w3-button w3-black">services</button>
     <button onclick="document.getElementById('faqs').style.display='block'" class="w3-button w3-black">FAQs</button>
     <button onclick="document.getElementById('contact').style.display='block'" class="w3-button w3-black">contact</button>
-    <!--<button onclick="document.getElementById('docs').style.display='block'" class="w3-button w3-black">docs</button>-->
   </div>
   
   <!-- Mobile Navigation -->
@@ -110,7 +109,6 @@ textarea:-webkit-autofill:focus {
       <button onclick="document.getElementById('services-mobile').style.display='block'" class="w3-button w3-black">services</button>
       <button onclick="document.getElementById('faqs-mobile').style.display='block'" class="w3-button w3-black">FAQs</button>
       <button onclick="document.getElementById('contact').style.display='block'" class="w3-button w3-black">contact</button>
-      <!--<button onclick="document.getElementById('docs').style.display='block'" class="w3-button w3-black">docs</button>-->
     </div>
   </div>
 
@@ -179,7 +177,7 @@ textarea:-webkit-autofill:focus {
           <button class="w3-button w3-dark-grey w3-hover-black" type="reset">RESET FORM</button>
         </p>
         <br>
-        <p>Questions? Contact us at <a href="mailto:cheers315llc@gmail.com">cheers315llc@gmail.com</p>
+        <p>Questions? Contact us at <a href="mailto:cheers315llc@gmail.com">cheers315llc@gmail.com</a></p>
       </form>
     </div>
   </div>
@@ -205,11 +203,11 @@ textarea:-webkit-autofill:focus {
         <span onclick="document.getElementById('services').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
         <h1></h1>
       </div>
-      <div class="w3-container">
-        <img src="images/servicescontent.png" alt="services" style="width: 100%; height: auto; border-color: black;">
+      <div class="w3-container" style="border-radius: 0px">
+        <img src="images/servicescontent.png" alt="About Us" style="width: 100%; height: auto; border-color: black;">
       </div>
+    </div>
   </div>
-</div>
 
 <!-- faqs Modal -->
 <div id="faqs" class="w3-modal">
@@ -221,7 +219,7 @@ textarea:-webkit-autofill:focus {
       <div class="w3-container">
         <img src="images/faqcontent.png" alt="faq" style="width: 100%; height: auto; background-color: black;">
       </div>
-  </div>
+    </div>
 </div>
 
 <!-- about-mobile Modal -->
@@ -254,7 +252,7 @@ textarea:-webkit-autofill:focus {
   </div>
 </div>
 
-<!-- Docs Modal
+<!-- Docs Modal -->
 <div id="docs" class="w3-modal">
   <div class="w3-modal-content w3-animate-zoom">
     <div class="w3-container w3-black">
@@ -289,7 +287,7 @@ textarea:-webkit-autofill:focus {
     </div>
   </div>
 </div>
--->
+
 <script>
   // Get today's date and set time to current time
   let today = new Date();
@@ -491,5 +489,4 @@ async function handleContractUpload(event) {
 
 </body>
 </html>
-
 
